@@ -1,0 +1,340 @@
+git init  -- Git initializing local reposotory. It will create a .git folder on the working directory
+
+add two text file(cold.text and hot.text)- Basically its untracted files so need to be tracked by using 
+git add cold.text command. If you want to track all files then use git add --all or git add .
+
+Git log will show many commit you have made by using git log command. 
+It will show last commit first and HEAD will be on last commit.
+To show all commit in oneline commandis git log --oneline
+
+It you add any test or something on the text file you created then use git status, it will show modified that file in screen.
+
+If we want to go previous stage/commit then use git log --oneline. 
+it will like below 
+$ git log --oneline
+4215af1 (HEAD -> master) ice cube added
+51185ed chocolate has been added
+05f28e1 First commit
+Then use git checkout 51185ed (this number is commit number).HEAD will change to where you checkout.
+
+If you want to checkout to master branch then you will see what was the file in begining. Command is git checkout master.
+
+Git diff will show compare with last commit and your current changes. If you added text some chocolate added in chocolate.txt file
+but did not commit then you will see what changes you have done compare with last commit
+$ git log --oneline
+4215af1 (HEAD -> master) ice cube added
+51185ed chocolate has been added
+05f28e1 First commit
+
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/COFFEE (master)
+$ git diff
+diff --git a/chocolate.txt b/chocolate.txt
+index e69de29..42f2c8e 100644
+--- a/chocolate.txt
++++ b/chocolate.txt
+@@ -0,0 +1 @@
++some chocolate added
+\ No newline at end of file
+
+git show will show you what changes you have done in certain commit using the commit number 
+$ git show 4215af1
+commit 4215af1ea2b0ad59b1a6fe7db97c6f0c5a63b808 (HEAD -> master)
+Author: enadul <shaheen_cse08@yahoo.com>
+Date:   Thu May 9 10:39:28 2024 -0500
+
+    ice cube added
+
+diff --git a/cold.txt b/cold.txt
+index e69de29..5dfd9d4 100644
+--- a/cold.txt
++++ b/cold.txt
+@@ -0,0 +1 @@
++ice cube added
+\ No newline at end of file
+
+check 2 commit changes difference you have to use the command git diff d64f6c8 43251ef
+
+$ git log --oneline
+43251ef (HEAD -> master) dark chocolate added
+d64f6c8 some chocolate added
+4215af1 ice cube added
+51185ed chocolate has been added
+05f28e1 First commit
+
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/COFFEE (master)
+$ git diff d64f6c8 43251ef
+diff --git a/chocolate.txt b/chocolate.txt
+index 42f2c8e..088c6e2 100644
+--- a/chocolate.txt
++++ b/chocolate.txt
+@@ -1 +1,3 @@
+-some chocolate added
+\ No newline at end of file
++some chocolate added
++
++dark chocolate added
+\ No newline at end of file
+
+Git will not show the difference after add files to stages.Git is thinking that you already checked the changes.
+There is a command check the difference even after you add on the stagging area. git diff --staged
+
+$ git diff --staged
+diff --git a/chocolate.txt b/chocolate.txt
+index b97bd88..9954cf0 100644
+--- a/chocolate.txt
++++ b/chocolate.txt
+@@ -2,4 +2,6 @@ some chocolate added
+
+ dark chocolate added
+
+-more chocolate added
+\ No newline at end of file
++more chocolate added
++
++some junk
+\ No newline at end of file
+
+If you want to remove a file that remove will be only from directory , not from all because you already commited 
+chages in different commit/stage. To remove file command is git rm hot.txt. It will show deleted in screen that means git
+tracking this file. If you dont wanted to track git that remove file then command is git restore --staged hot.txt(hot.txt is file name)
+After that hot.txt file will be deleted and it will not show on the stage. Below we can see
+$ git status
+On branch master
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+        modified:   chocolate.txt
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    hot.txt
+
+To connect and push your local changes to remote then you have to copy these command from you remote repository
+git remote add origin https://github.com/ehshaheen1/coffee.git
+git push -u origin master
+
+If you want to give a name a new project while clone then use this command 
+git clone gitLink name
+
+Git fetch will work from remote repository to local repository
+command is git fetch. After git fetch command then if you use git status then you will see a message that you are one commit 
+behind because you use git fetch which changes comes from remote repository to local repository.
+-
+$ git fetch
+remote: Enumerating objects: 5, done.
+remote: Counting objects: 100% (5/5), done.
+remote: Compressing objects: 100% (2/2), done.
+remote: Total 3 (delta 0), reused 0 (delta 0), pack-reused 0
+Unpacking objects: 100% (3/3), 976 bytes | 244.00 KiB/s, done.
+From https://github.com/ehshaheen1/coffee
+   598e0b6..b5db65a  master     -> origin/master
+
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/COFFEE (master)
+$ git status
+On branch master
+Your branch is behind 'origin/master' by 1 commit, and can be fast-forwarded.
+  (use "git pull" to update your local branch)
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        deleted:    hot.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+Git pull will come changes from remote repository to work directory
+Here is the command git pull 
+$ git pull
+Updating 598e0b6..b5db65a
+Fast-forward
+ cold.txt | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+ 
+To create branch command is : git branch branchName and check the how many branch do we have command is git branch 
+start mark meaning for current branch
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/COFFEE (master)
+$ git branch testbranch
+
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/COFFEE (master)
+$ git branch
+* master
+  testbranch
+
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/COFFEE (master)
+$ git checkout testbranch
+Switched to branch 'testbranch'
+D       hot.txt
+
+If you want changes new branch testbranch and you also this changes in master branch then you have to checkout to master branch
+and merge. Here is the command git merge testbranch
+
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/COFFEE (testbranch)
+$ git commit -m "Test branch first commit"
+[testbranch b478110] Test branch first commit
+ 1 file changed, 1 insertion(+)
+ create mode 100644 testbranch.txt
+
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/COFFEE (testbranch)
+$ git branch
+  master
+* testbranch
+
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/COFFEE (testbranch)
+$ git checkout master
+Switched to branch 'master'
+D       hot.txt
+Your branch is up to date with 'origin/master'.
+
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/COFFEE (master)
+$ git merge testbranch
+Updating b5db65a..b478110
+Fast-forward
+ testbranch.txt | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 testbranch.txt
+ 
+If you changes an existing file in new branch called test then you changes the existing file what was there 
+then checkout to the master branch and merge with testbranch
+
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/COFFEE (master)
+$ git checkout testbranch
+Switched to branch 'testbranch'
+D       hot.txt
+
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/COFFEE (testbranch)
+$ git status
+On branch testbranch
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   cold.txt
+        deleted:    hot.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/COFFEE (testbranch)
+$ git add cold.txt
+
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/COFFEE (testbranch)
+$ git commit -m "Cold test added some more ice cube"
+[testbranch 0b3acb5] Cold test added some more ice cube
+ 1 file changed, 1 insertion(+)
+
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/COFFEE (testbranch)
+$ git checkout master
+Switched to branch 'master'
+D       hot.txt
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/COFFEE (master)
+$ git merge testbranch
+Updating b478110..0b3acb5
+Fast-forward
+ cold.txt | 1 +
+ 1 file changed, 1 insertion(+)
+
+If you want to delete a branch command is 
+git branch -D branchName
+
+git stash mean saving file temporory and can get back if you needed. Remember we did not commit that file.
+$ git status
+On branch master
+
+No commits yet
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        code.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/Stash (master)
+$ git add .
+
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/Stash (master)
+$ git commit -m "init commit"
+[master (root-commit) 96cfd67] init commit
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 code.txt
+
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/Stash (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   code.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/Stash (master)
+$ git stash
+Saved working directory and index state WIP on master: 96cfd67 init commit
+
+
+if you want to see the file again what you stash them then use this command
+git stash pop
+
+$ git stash pop
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   code.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Dropped refs/stash@{0} (c4d702ab51a1ec6459e883562fb5f66e94bd9d0c)
+
+
+You can check list of stash you did. Command is git stash list
+$ git stash list
+stash@{0}: WIP on master: 96cfd67 init commit
+stash@{1}: WIP on master: 96cfd67 init commit
+To go particular stash use below$ git stash pop stash@{1}
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   code.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+Dropped stash@{1} (82e618a5d1420281df9eabdb46e8cb04ab7e8cc0)
+
+To remove un file use git clean -f
+Use below command to confirm which file would delete
+$ git clean -f -n
+Would remove 1.txt
+Would remove 2.txt
+
+Git ignore just ignore the mentioned file in .gitignore. Here you cant see the 2.psd file.
+Because we mentioned that in the gitignore file.
+$ touch .gitignore
+
+AzureAD+EnadulHShaheen@IBM-PF3KLQK9 MINGW32 ~/Git_Tutorial/Stash (master)
+$ git status
+On branch master
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   code.txt
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        .gitignore
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
