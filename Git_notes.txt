@@ -237,6 +237,14 @@ Fast-forward
 If you want to delete a branch command is 
 git branch -D branchName
 
+-- Seeing it in action might help you better understanding the difference.
+Assuming we're working on master branch and have a file hello.txt that contains "Hello" string.
+Let's modify the file and add " world" string to it. 
+Now you want to move to a different branch to fix a minor bug you've just found, so you need to stash your changes:
+git stash
+You moved to the other branch, fixed the bug and now you're ready to continue working on your master branch, 
+so you pop the changes: git stash pop
+
 git stash mean saving file temporory and can get back if you needed. Remember we did not commit that file.
 $ git status
 On branch master
